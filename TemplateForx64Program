@@ -1,0 +1,33 @@
+; File: basic_template_x64.asm
+
+; Declare global symbols, such as the entry point of your program
+global _start
+
+; Define the data section, where you can store initialized variables
+section .data
+    ; Declare and initialize variables here
+    ; Example:
+    my_string db 'Hello, World!', 0x0A ; Declare a null-terminated string with a newline character
+
+; Define the bss section, where you can store uninitialized variables
+section .bss
+    ; Declare uninitialized variables here
+    ; Example:
+    buffer resb 256 ; Reserve 256 bytes of uninitialized space
+
+; Define the text section, where your code resides
+section .text
+
+; The entry point of your program
+_start:
+    ; Write a message to stdout
+    mov rax, 1 ; System call number for sys_write (1)
+    mov rdi, 1 ; File descriptor for stdout (1)
+    lea rsi, [my_string] ; Address of the string
+    mov rdx, 13 ; Length of the string
+    syscall ; Trigger the system call
+
+    ; Program exit system call
+    mov rax, 60 ; System call number for sys_exit (60)
+    xor rdi, rdi ; Return code 0 (success)
+    syscall ; Trigger the system call
