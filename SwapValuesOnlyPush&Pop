@@ -1,0 +1,22 @@
+; swap the theoretical values of rdi and rsi
+; only use push and pop not any mov crap
+;fundamental to know to understand how the stack and it's regs work
+
+push rdi
+push rsi
+pop rdi
+pop rsi
+
+;pushing a value (not necessarily stored in a register) means writing it to the stack.
+
+;popping means restoring whatever is on top of the stack into a register. Those are basic instructions:
+
+;another example below
+
+push 0xdeadbeef      ; push a value to the stack
+pop eax              ; eax is now 0xdeadbeef
+
+; swap contents of registers
+push eax
+mov eax, ebx
+pop ebx
